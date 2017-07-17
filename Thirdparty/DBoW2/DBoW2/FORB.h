@@ -19,7 +19,7 @@
 namespace DBoW2 {
 
 /// Functions to manipulate ORB descriptors
-class FORB: protected FClass
+class DBOW2_API FORB: protected FClass
 {
 public:
 
