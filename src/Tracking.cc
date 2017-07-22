@@ -1509,7 +1509,13 @@ void Tracking::Reset()
     {
         mpViewer->RequestStop();
         while(!mpViewer->isStopped())
-            usleep(3000);
+		{
+#ifdef _WIN32
+			Sleep(3);
+#else
+			usleep(3000);
+#endif
+		}
     }
 
     // Reset Local Mapping

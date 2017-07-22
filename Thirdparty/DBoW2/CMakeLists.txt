@@ -40,11 +40,13 @@ if(NOT OpenCV_FOUND)
    endif()
 endif()
 
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+
 
 add_definitions(-DDBOW2_SHARED_LIBS)
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 add_library(DBoW2 SHARED ${SRCS_DBOW2} ${SRCS_DUTILS} ${HDRS_DBOW2} ${HDRS_DUTILS})
+set_target_properties(DBoW2 PROPERTIES DEBUG_POSTFIX "-d"
+						LINK_FLAGS "/DEBUG")
 target_link_libraries(DBoW2 ${OpenCV_LIBS})
 

@@ -29,6 +29,7 @@
 
 #include"System.h"
 
+
 using namespace std;
 
 void LoadImages(const string &strSequence, vector<string> &vstrImageFilenames,
@@ -36,21 +37,31 @@ void LoadImages(const string &strSequence, vector<string> &vstrImageFilenames,
 
 int main(int argc, char **argv)
 {
+	string strVocFile, strSettingsFile, strImageFIle;
     if(argc != 4)
     {
         cerr << endl << "Usage: ./mono_kitti path_to_vocabulary path_to_settings path_to_sequence" << endl;
-        return 1;
+		strVocFile = "D:\Funny-Works\CodeWorks\SLAM\ORB-SLAM-Series\ORB_SLAM2\Vocabulary\ORBvoc.txt";
+		strSettingsFile = "D:\Funny-Works\CodeWorks\SLAM\ORB-SLAM-Series\ORB_SLAM2\Examples\Monocular\KITTI00-02.yaml";
+		strImageFIle = "F:\Academic Research\Datas\SLAMDatas\KITTI\data_odometry_gray\dataset\sequences\00";
     }
+	else
+	{
+		strVocFile = argv[1];
+		strSettingsFile = argv[2];
+		strImageFIle = argv[3];
+
+	}
 
     // Retrieve paths to images
     vector<string> vstrImageFilenames;
     vector<double> vTimestamps;
-    LoadImages(string(argv[3]), vstrImageFilenames, vTimestamps);
+    LoadImages(strImageFIle, vstrImageFilenames, vTimestamps);
 
     int nImages = vstrImageFilenames.size();
 
     // Create SLAM system. It initializes all system threads and gets ready to process frames.
-    ORB_SLAM2::System SLAM(argv[1],argv[2],ORB_SLAM2::System::MONOCULAR,true);
+    ORB_SLAM2::System SLAM(strVocFile.c_str(), strSettingsFile.c_str(),ORB_SLAM2::System::MONOCULAR,true);
 
     // Vector for tracking time statistics
     vector<float> vTimesTrack;
@@ -100,8 +111,15 @@ int main(int argc, char **argv)
         else if(ni>0)
             T = tframe-vTimestamps[ni-1];
 
-        if(ttrack<T)
-            usleep((T-ttrack)*1e6);
+		if (ttrack < T)
+		{
+#ifdef WIN32
+			Sleep((T - ttrack)*1e3);
+#else
+			usleep((T - ttrack)*1e6);
+#endif // WIN32
+		}
+            
     }
 
     // Stop all threads

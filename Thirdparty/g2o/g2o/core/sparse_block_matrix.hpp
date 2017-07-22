@@ -271,12 +271,15 @@ namespace g2o {
       for (typename SparseBlockMatrix<MatrixType>::IntBlockMap::const_iterator it=_blockCols[i].begin(); it!=_blockCols[i].end(); ++it){
         const typename SparseBlockMatrix<MatrixType>::SparseMatrixBlock* a=it->second;
         int destOffset = rowBaseOfBlock(it->first);
-        if (destOffset > srcOffset) // only upper triangle
-          break;
+		if (destOffset > srcOffset) // only upper triangle
+			break;
         // destVec += *a * srcVec (according to the sub-vector parts)
-        internal::axpy(*a, srcVec, srcOffset, destVec, destOffset);
+		/*internal::axpy(*a, srcVec, srcOffset, destVec, destOffset);
         if (destOffset < srcOffset)
-          internal::atxpy(*a, srcVec, destOffset, destVec, srcOffset);
+          internal::atxpy(*a, srcVec, destOffset, destVec, srcOffset);*/
+		internal::template axpy<typename SparseBlockMatrix<MatrixType>::SparseMatrixBlock>(*a, srcVec, srcOffset, destVec, destOffset);
+		if (destOffset < srcOffset)
+			internal::template atxpy<typename SparseBlockMatrix<MatrixType>::SparseMatrixBlock>(*a, srcVec, destOffset, destVec, srcOffset);
       }
     }
   }

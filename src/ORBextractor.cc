@@ -61,7 +61,7 @@
 #include <vector>
 
 #include "ORBextractor.h"
-
+#include <iterator>
 
 using namespace cv;
 using namespace std;

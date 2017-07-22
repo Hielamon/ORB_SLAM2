@@ -15,7 +15,7 @@
 #ifdef _MSC_VER
 // We are using a Microsoft compiler:
 #ifdef G2O_SHARED_LIBS
-#ifdef G2O_EXPORTS
+#ifdef g2o_EXPORTS
 #define G2O_CORE_API __declspec(dllexport)
 #else
 #define G2O_CORE_API __declspec(dllimport)

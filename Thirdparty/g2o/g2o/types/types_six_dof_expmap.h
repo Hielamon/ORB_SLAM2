@@ -56,7 +56,7 @@ typedef Matrix<double, 6, 6> Matrix6d;
  * \brief SE3 Vertex parameterized internally with a transformation matrix
  and externally with its exponential map
  */
-class  VertexSE3Expmap : public BaseVertex<6, SE3Quat>{
+class G2O_TYPES_API VertexSE3Expmap : public BaseVertex<6, SE3Quat>{
 public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
@@ -77,7 +77,7 @@ public:
 };
 
 
-class  EdgeSE3ProjectXYZ: public  BaseBinaryEdge<2, Vector2d, VertexSBAPointXYZ, VertexSE3Expmap>{
+class G2O_TYPES_API EdgeSE3ProjectXYZ: public  BaseBinaryEdge<2, Vector2d, VertexSBAPointXYZ, VertexSE3Expmap>{
 public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
@@ -109,7 +109,7 @@ public:
 };
 
 
-class  EdgeStereoSE3ProjectXYZ: public  BaseBinaryEdge<3, Vector3d, VertexSBAPointXYZ, VertexSE3Expmap>{
+class G2O_TYPES_API EdgeStereoSE3ProjectXYZ: public  BaseBinaryEdge<3, Vector3d, VertexSBAPointXYZ, VertexSE3Expmap>{
 public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
@@ -140,7 +140,7 @@ public:
   double fx, fy, cx, cy, bf;
 };
 
-class  EdgeSE3ProjectXYZOnlyPose: public  BaseUnaryEdge<2, Vector2d, VertexSE3Expmap>{
+class G2O_TYPES_API EdgeSE3ProjectXYZOnlyPose: public  BaseUnaryEdge<2, Vector2d, VertexSE3Expmap>{
 public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
@@ -171,7 +171,7 @@ public:
 };
 
 
-class  EdgeStereoSE3ProjectXYZOnlyPose: public  BaseUnaryEdge<3, Vector3d, VertexSE3Expmap>{
+class G2O_TYPES_API EdgeStereoSE3ProjectXYZOnlyPose: public  BaseUnaryEdge<3, Vector3d, VertexSE3Expmap>{
 public:
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 

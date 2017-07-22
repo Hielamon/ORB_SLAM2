@@ -41,7 +41,7 @@ namespace DBoW2 {
 /// @param F class of descriptor functions
 template<class TDescriptor, class F>
 /// Generic Vocabulary
-class DBOW2_API TemplatedVocabulary
+class TemplatedVocabulary
 {		
 public:
   

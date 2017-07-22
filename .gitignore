@@ -23,3 +23,10 @@ build/
 lib/
 
 build_x64_vs15
+*.exe
+*.exp
+*.lib
+*.pdb
+*.ilk
+*.ipdb
+*.iobj

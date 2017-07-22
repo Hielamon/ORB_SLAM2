@@ -157,7 +157,13 @@ void Viewer::Run()
         {
             while(isStopped())
             {
-                usleep(3000);
+#ifdef WIN32
+				Sleep(3);
+#else
+				usleep(3000);
+
+#endif // WIN32
+
             }
         }
 
